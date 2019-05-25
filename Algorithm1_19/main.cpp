@@ -3,62 +3,63 @@
 using namespace std;
 
 int main() {
-    int n;
+    int maxNumber;
     cout << "Enter number 'n' of {1,2,..n}: " << endl;
-    cin >> n;
+    cin >> maxNumber;
 
-    int block[n + 1];
-    int previous[n + 1];
-    int next[n + 1];
-    bool forward[n + 1];
+    int block[maxNumber + 1];
+    int previousBlock[maxNumber + 1];
+    int nextBlock[maxNumber + 1];
+    bool forward[maxNumber + 1];
+    int activeElement;
 
-    for (int i = 1; i <= n; ++i) {
-        block[i] = 1;
-        forward[i] = true;
+    for (int number = 1; number <= maxNumber; number++) {
+        block[number] = 1;
+        forward[number] = true;
     }
-    next[1] = 0;
+    nextBlock[1] = 0;
 
-    for (int i = 1; i <= n; ++i) {
-        cout << block[i] << " ";
+    for (int number = 1; number <= maxNumber; ++number) {
+        cout << block[number] << " ";
     }
     cout << endl;
 
-    int j = n;
-    while (j > 1) {
-        int k = block[j];
-        if (forward[j]) {
-            if (next[k] == 0) {
-                next[k] = j;
-                previous[j] = k;
-                next[j] = 0;
+    activeElement = maxNumber;
+    while (activeElement > 1) {
+        int numberOfActiveElementBlock = block[activeElement];
+        if (forward[activeElement]) {
+            if (nextBlock[numberOfActiveElementBlock] == 0) {
+                nextBlock[numberOfActiveElementBlock] = activeElement;
+                previousBlock[activeElement] = numberOfActiveElementBlock;
+                nextBlock[activeElement] = 0;
             }
-            if (next[k] > j) {
-                previous[j] = k;
-                next[j] = next[k];
-                previous[next[j]] = j;
-                next[k] = j;
+            if (nextBlock[numberOfActiveElementBlock] > activeElement) {
+                previousBlock[activeElement] = numberOfActiveElementBlock;
+                nextBlock[activeElement] = nextBlock[numberOfActiveElementBlock];
+                previousBlock[nextBlock[activeElement]] = activeElement;
+                nextBlock[numberOfActiveElementBlock] = activeElement;
             }
-            block[j] = next[k];
+            block[activeElement] = nextBlock[numberOfActiveElementBlock];
         } else {
-            block[j] = previous[k];
-            if (k == j) {
-                if (next[k] == 0) {
-                    next[previous[k]] = 0;
+            block[activeElement] = previousBlock[numberOfActiveElementBlock];
+            if (numberOfActiveElementBlock == activeElement) {
+                if (nextBlock[numberOfActiveElementBlock] == 0) {
+                    nextBlock[previousBlock[numberOfActiveElementBlock]] = 0;
                 } else {
-                    next[previous[k]] = next[k];
-                    previous[next[k]] = previous[k];
+                    nextBlock[previousBlock[numberOfActiveElementBlock]] = nextBlock[numberOfActiveElementBlock];
+                    previousBlock[nextBlock[numberOfActiveElementBlock]] = previousBlock[numberOfActiveElementBlock];
                 }
             }
         }
-        for (int i = 1; i <= n; ++i) {
-            cout << block[i] << " ";
+        for (int number = 1; number <= maxNumber; number++) {
+            cout << block[number] << " ";
         }
         cout << endl;
-        j = n;
-        while (j > 1 && ((forward[j] && block[j] == j)
-                         || (!forward[j] && block[j] == 1))) {
-            forward[j] = !forward[j];
-            j--;
+        activeElement = maxNumber;
+        while (activeElement > 1 && ((forward[activeElement] && block[activeElement] == activeElement)
+                         || (!forward[activeElement] && block[activeElement] == 1))) {
+            forward[activeElement] = !forward[activeElement];
+            activeElement--;
         }
     }
 

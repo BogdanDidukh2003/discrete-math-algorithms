@@ -32,6 +32,8 @@
 *.app
 
 # CLion
-.idea
-cmake-build-debug
+Algorithm1_19/.idea
+Algorithm1_19/cmake-build-debug
+Algorithm1_22/.idea
+Algorithm1_22/cmake-build-debug
 

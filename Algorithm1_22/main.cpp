@@ -3,49 +3,49 @@
 using namespace std;
 
 int main() {
-    int n;
+    int number;
     cout << "Enter number 'n': " << endl;
-    cin >> n;
+    cin >> number;
 
-    int S[n + 1];
-    int R[n + 1];
-    int d;
+    int uniqueSummands[number + 1];
+    int numberOfUniqueSummand[number + 1];
+    int numberOfPartitions;
 
-    S[1] = n;
-    R[1] = 1;
-    d = 1;
+    uniqueSummands[1] = number;
+    numberOfUniqueSummand[1] = 1;
+    numberOfPartitions = 1;
 
-    for (int i = 1; i <= d; i++) {
-        for (int j = 1; j <= R[i]; j++) {
-            cout << " " << S[i];
+    for (int element = 1; element <= numberOfPartitions; element++) {
+        for (int repeatingNumber = 1; repeatingNumber <= numberOfUniqueSummand[element]; repeatingNumber++) {
+            cout << uniqueSummands[element] << " ";
         }
     }
     cout << endl;
 
-    while (S[1] > 1) {
+    while (uniqueSummands[1] > 1) {
         int sum = 0;
-        if (S[d] == 1) {
-            sum += R[d];
-            d--;
+        if (uniqueSummands[numberOfPartitions] == 1) {
+            sum += numberOfUniqueSummand[numberOfPartitions];
+            numberOfPartitions--;
         }
-        sum += S[d];
-        R[d]--;
-        int l = S[d] - 1;
-        if (R[d] > 0) {
-            d++;
+        sum += uniqueSummands[numberOfPartitions];
+        numberOfUniqueSummand[numberOfPartitions]--;
+        int summand = uniqueSummands[numberOfPartitions] - 1;
+        if (numberOfUniqueSummand[numberOfPartitions] > 0) {
+            numberOfPartitions++;
         }
-        S[d] = l;
-        R[d] = sum / l;
-        l = sum % l;
-        if (l != 0) {
-            d++;
-            S[d] = l;
-            R[d] = 1;
+        uniqueSummands[numberOfPartitions] = summand;
+        numberOfUniqueSummand[numberOfPartitions] = sum / summand;
+        summand = sum % summand;
+        if (summand != 0) {
+            numberOfPartitions++;
+            uniqueSummands[numberOfPartitions] = summand;
+            numberOfUniqueSummand[numberOfPartitions] = 1;
         }
 
-        for (int i = 1; i <= d; i++) {
-            for (int j = 1; j <= R[i]; j++) {
-                cout << " " << S[i];
+        for (int element = 1; element <= numberOfPartitions; element++) {
+            for (int repeatingNumber = 1; repeatingNumber <= numberOfUniqueSummand[element]; repeatingNumber++) {
+                cout << uniqueSummands[element] << " ";
             }
         }
         cout << endl;
@@ -53,4 +53,3 @@ int main() {
 
     return 0;
 }
-
