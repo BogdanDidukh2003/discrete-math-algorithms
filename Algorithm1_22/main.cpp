@@ -17,7 +17,7 @@ int main() {
 
     for (int i = 1; i <= d; i++) {
         for (int j = 1; j <= R[i]; j++) {
-            cout << S[i];
+            cout << " " << S[i];
         }
     }
     cout << endl;
@@ -45,7 +45,7 @@ int main() {
 
         for (int i = 1; i <= d; i++) {
             for (int j = 1; j <= R[i]; j++) {
-                cout << S[i];
+                cout << " " << S[i];
             }
         }
         cout << endl;
@@ -53,3 +53,4 @@ int main() {
 
     return 0;
 }
+

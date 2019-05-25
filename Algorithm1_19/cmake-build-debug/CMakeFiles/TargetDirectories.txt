@@ -1,3 +1,0 @@
-/home/shine-at-dusk/CLionProjects/Algorithm1_19/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/shine-at-dusk/CLionProjects/Algorithm1_19/cmake-build-debug/CMakeFiles/Algorithm1_19.dir
-/home/shine-at-dusk/CLionProjects/Algorithm1_19/cmake-build-debug/CMakeFiles/edit_cache.dir
