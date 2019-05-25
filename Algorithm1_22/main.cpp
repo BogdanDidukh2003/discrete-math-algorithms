@@ -15,6 +15,7 @@ int main() {
     numberOfUniqueSummand[1] = 1;
     numberOfPartitions = 1;
 
+    cout << "Partitions:" << endl;
     for (int element = 1; element <= numberOfPartitions; element++) {
         for (int repeatingNumber = 1; repeatingNumber <= numberOfUniqueSummand[element]; repeatingNumber++) {
             cout << uniqueSummands[element] << " ";
