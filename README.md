@@ -2,7 +2,7 @@
 
 ### Algorithm 1.19
 
-Generating all partitions of a plural {1,2,...,n}
+Generating all partitions of a set {1,2,...,n}
 
 (Output shows block of a number which is equal to index)
 
