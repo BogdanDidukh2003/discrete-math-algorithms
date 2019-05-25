@@ -1,6 +1,14 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
+
+void printPartitionUsingBlock(const int block[], int length);
+ostream& operator<<(ostream& os, const int numbers[]);
+int maxNumberInArray(const int array[], int firstIndex, int lastIndex);
+
+// for overloading <<
+int arrayOfNumbersLength;
 
 int main() {
     int maxNumber;
@@ -19,10 +27,8 @@ int main() {
     }
     nextBlock[1] = 0;
 
-    for (int number = 1; number <= maxNumber; ++number) {
-        cout << block[number] << " ";
-    }
-    cout << endl;
+    cout << "\nPartitions: " << endl;
+    printPartitionUsingBlock(block, maxNumber + 1);
 
     activeElement = maxNumber;
     while (activeElement > 1) {
@@ -51,10 +57,7 @@ int main() {
                 }
             }
         }
-        for (int number = 1; number <= maxNumber; number++) {
-            cout << block[number] << " ";
-        }
-        cout << endl;
+        printPartitionUsingBlock(block, maxNumber + 1);
         activeElement = maxNumber;
         while (activeElement > 1 && ((forward[activeElement] && block[activeElement] == activeElement)
                          || (!forward[activeElement] && block[activeElement] == 1))) {
@@ -64,4 +67,52 @@ int main() {
     }
 
     return 0;
+}
+
+void printPartitionUsingBlock(const int block[], int length) {
+    int numberOfBlock;
+    int thisBlock;
+    int maxBlock = maxNumberInArray(block, 0, length - 1);
+
+    for (thisBlock = 1; thisBlock <= maxBlock; thisBlock++) {
+        int numbers[length];
+        int index = -1;
+
+        for (int number = 1; number < length; number++) {
+            numberOfBlock = block[number];
+            if (numberOfBlock == thisBlock) {
+                numbers[++index] = number;
+            }
+        }
+
+        arrayOfNumbersLength = index + 1;
+        cout << numbers;
+    }
+    cout << endl;
+}
+
+ostream& operator<<(ostream& os, const int numbers[]) {
+    os << "";
+    if (arrayOfNumbersLength == 0) {
+        return os;
+    }
+
+    os << "( ";
+    for (int numberIndex = 0; numberIndex < arrayOfNumbersLength; numberIndex++) {
+        os << numbers[numberIndex] << " ";
+    }
+    os << ")";
+
+    return os;
+}
+
+int maxNumberInArray(const int array[], int firstIndex, int lastIndex) {
+    int highNumber = array[firstIndex];
+
+    for (int index = firstIndex + 1; index <= lastIndex; index++) {
+        if (array[index] > highNumber)
+            highNumber = array[index];
+    }
+
+    return highNumber;
 }
